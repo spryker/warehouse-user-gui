@@ -51,11 +51,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
      */
     public const PROPEL_QUERY_WAREHOUSE_USER_ASSIGNMENT = 'PROPEL_QUERY_WAREHOUSE_USER_ASSIGNMENT';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
@@ -69,11 +64,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserFacade(Container $container): Container
     {
         $container->set(static::FACADE_USER, function (Container $container) {
@@ -83,11 +73,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addWarehouseUserFacade(Container $container): Container
     {
         $container->set(static::FACADE_WAREHOUSE_USER, function (Container $container) {
@@ -97,11 +82,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUtilSanitizeService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_SANITIZE, function (Container $container) {
@@ -113,11 +93,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUtilEncodingService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_ENCODING, function (Container $container) {
@@ -129,11 +104,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addStockPropelQuery(Container $container): Container
     {
         $container->set(static::PROPEL_QUERY_STOCK, $container->factory(function () {
@@ -143,11 +113,6 @@ class WarehouseUserGuiDependencyProvider extends AbstractBundleDependencyProvide
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addWarehouseUserAssignmentPropelQuery(Container $container): Container
     {
         $container->set(static::PROPEL_QUERY_WAREHOUSE_USER_ASSIGNMENT, $container->factory(function () {

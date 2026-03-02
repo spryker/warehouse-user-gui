@@ -26,22 +26,12 @@ class WarehouseUserGuiToWarehouseUserFacadeBridge implements WarehouseUserGuiToW
         $this->warehouseUserFacade = $warehouseUserFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\WarehouseUserAssignmentCollectionRequestTransfer $warehouseUserAssignmentCollectionRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\WarehouseUserAssignmentCollectionResponseTransfer
-     */
     public function createWarehouseUserAssignmentCollection(
         WarehouseUserAssignmentCollectionRequestTransfer $warehouseUserAssignmentCollectionRequestTransfer
     ): WarehouseUserAssignmentCollectionResponseTransfer {
         return $this->warehouseUserFacade->createWarehouseUserAssignmentCollection($warehouseUserAssignmentCollectionRequestTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\WarehouseUserAssignmentCollectionDeleteCriteriaTransfer $warehouseUserAssignmentCollectionDeleteCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\WarehouseUserAssignmentCollectionResponseTransfer
-     */
     public function deleteWarehouseUserAssignmentCollection(
         WarehouseUserAssignmentCollectionDeleteCriteriaTransfer $warehouseUserAssignmentCollectionDeleteCriteriaTransfer
     ): WarehouseUserAssignmentCollectionResponseTransfer {

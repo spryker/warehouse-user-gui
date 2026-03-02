@@ -90,12 +90,6 @@ abstract class AbstractWarehouseTable extends AbstractTable
      */
     protected WarehouseUserGuiToUtilSanitizeServiceInterface $sanitizeService;
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     * @param \Orm\Zed\Stock\Persistence\SpyStockQuery $stockQuery
-     * @param \Spryker\Zed\WarehouseUserGui\Dependency\Service\WarehouseUserGuiToUtilEncodingServiceInterface $encodingService
-     * @param \Spryker\Zed\WarehouseUserGui\Dependency\Service\WarehouseUserGuiToUtilSanitizeServiceInterface $sanitizeService
-     */
     public function __construct(
         UserTransfer $userTransfer,
         SpyStockQuery $stockQuery,
@@ -108,21 +102,10 @@ abstract class AbstractWarehouseTable extends AbstractTable
         $this->sanitizeService = $sanitizeService;
     }
 
-    /**
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     abstract protected function prepareQuery(): ModelCriteria;
 
-    /**
-     * @return string
-     */
     abstract protected function getCheckboxHeaderName(): string;
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config->setHeader([
@@ -185,11 +168,6 @@ abstract class AbstractWarehouseTable extends AbstractTable
         ];
     }
 
-    /**
-     * @param bool $isActive
-     *
-     * @return string
-     */
     protected function getStatusLabel(bool $isActive): string
     {
         return $isActive ?
@@ -197,11 +175,6 @@ abstract class AbstractWarehouseTable extends AbstractTable
             $this->generateLabel(static::LABEL_TITLE_INACTIVE, static::LABEL_CLASS_DANGER);
     }
 
-    /**
-     * @param \Orm\Zed\Stock\Persistence\SpyStock $stockEntity
-     *
-     * @return string
-     */
     protected function getCheckboxColumn(SpyStock $stockEntity): string
     {
         /** @var string $encodedTableData */

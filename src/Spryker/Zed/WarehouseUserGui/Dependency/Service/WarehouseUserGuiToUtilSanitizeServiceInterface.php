@@ -9,12 +9,5 @@ namespace Spryker\Zed\WarehouseUserGui\Dependency\Service;
 
 interface WarehouseUserGuiToUtilSanitizeServiceInterface
 {
-    /**
-     * @param string $text
-     * @param bool $double
-     * @param string|null $charset
-     *
-     * @return string
-     */
     public function escapeHtml(string $text, bool $double = true, ?string $charset = null): string;
 }

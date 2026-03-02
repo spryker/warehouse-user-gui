@@ -85,11 +85,6 @@ class WarehouseUserAssignmentTableActionExpander implements WarehouseUserAssignm
             ]);
     }
 
-    /**
-     * @param string $userUuid
-     *
-     * @return string
-     */
     protected function createWarehouseUserAssignmentUrl(string $userUuid): string
     {
         return Url::generate(

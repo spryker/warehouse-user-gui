@@ -23,11 +23,6 @@ class AssignedWarehouseTable extends AbstractWarehouseTable
      */
     protected const URL_TEMPLATE_ASSIGNED_WAREHOUSE_TABLE = 'assigned-warehouse-table?%s=%s';
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config = parent::configure($config);
@@ -43,9 +38,6 @@ class AssignedWarehouseTable extends AbstractWarehouseTable
         return $config;
     }
 
-    /**
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function prepareQuery(): ModelCriteria
     {
         return $this->stockQuery
@@ -58,9 +50,6 @@ class AssignedWarehouseTable extends AbstractWarehouseTable
             ->withColumn(SpyStockTableMap::COL_IS_ACTIVE, AbstractWarehouseTable::COL_IS_ACTIVE);
     }
 
-    /**
-     * @return string
-     */
     protected function getCheckboxHeaderName(): string
     {
         return 'Assigned';

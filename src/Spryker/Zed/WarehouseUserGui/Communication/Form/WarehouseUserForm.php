@@ -32,9 +32,6 @@ class WarehouseUserForm extends AbstractType
      */
     protected const FIELD_UUIDS_WAREHOUSES_TO_DEASSIGN = 'uuidsWarehousesToDeassign';
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'warehouseUser';

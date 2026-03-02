@@ -30,13 +30,6 @@ class AvailableWarehouseTable extends AbstractWarehouseTable
      */
     protected SpyWarehouseUserAssignmentQuery $warehouseUserAssignmentQuery;
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     * @param \Orm\Zed\Stock\Persistence\SpyStockQuery $stockQuery
-     * @param \Spryker\Zed\WarehouseUserGui\Dependency\Service\WarehouseUserGuiToUtilEncodingServiceInterface $encodingService
-     * @param \Spryker\Zed\WarehouseUserGui\Dependency\Service\WarehouseUserGuiToUtilSanitizeServiceInterface $sanitizeService
-     * @param \Orm\Zed\WarehouseUser\Persistence\SpyWarehouseUserAssignmentQuery $warehouseUserAssignmentQuery
-     */
     public function __construct(
         UserTransfer $userTransfer,
         SpyStockQuery $stockQuery,
@@ -49,11 +42,6 @@ class AvailableWarehouseTable extends AbstractWarehouseTable
         $this->warehouseUserAssignmentQuery = $warehouseUserAssignmentQuery;
     }
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $config
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config = parent::configure($config);
@@ -69,9 +57,6 @@ class AvailableWarehouseTable extends AbstractWarehouseTable
         return $config;
     }
 
-    /**
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
-     */
     protected function prepareQuery(): ModelCriteria
     {
         $stockIds = $this->warehouseUserAssignmentQuery
@@ -87,9 +72,6 @@ class AvailableWarehouseTable extends AbstractWarehouseTable
             ->withColumn(SpyStockTableMap::COL_IS_ACTIVE, AbstractWarehouseTable::COL_IS_ACTIVE);
     }
 
-    /**
-     * @return string
-     */
     protected function getCheckboxHeaderName(): string
     {
         return 'Assign';

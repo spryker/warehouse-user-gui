@@ -126,11 +126,6 @@ class AssignWarehouseController extends AbstractController
         ]);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     public function availableWarehouseTableAction(Request $request): JsonResponse
     {
         /** @var string|null $userUuid */
@@ -145,11 +140,6 @@ class AssignWarehouseController extends AbstractController
         );
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     public function assignedWarehouseTableAction(Request $request): JsonResponse
     {
         /** @var string $userUuid */
@@ -190,11 +180,6 @@ class AssignWarehouseController extends AbstractController
         }
     }
 
-    /**
-     * @param string $userUuid
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUser(string $userUuid): ?UserTransfer
     {
         $userConditionsTransfer = (new UserConditionsTransfer())->addUuid($userUuid);
