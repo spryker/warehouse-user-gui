@@ -8,8 +8,12 @@
 function WarehouseIdSelector() {
     this.selectedIds = {};
 
-    this.addIdToSelection = (id) => {
-        this.selectedIds[id] = id;
+    /**
+     * @param {string} id
+     * @param {Array} row - Row the warehouse is shown with in the table of the selection.
+     */
+    this.addIdToSelection = (id, row) => {
+        this.selectedIds[id] = row;
     };
 
     this.removeIdFromSelection = (id) => {
@@ -19,6 +23,11 @@ function WarehouseIdSelector() {
     this.isIdSelected = (id) => this.selectedIds.hasOwnProperty(id);
 
     this.getSelectedIds = () => this.selectedIds;
+
+    /**
+     * @return {Array} Rows of every selected warehouse, the table of the selection is built from them.
+     */
+    this.getRows = () => Object.keys(this.selectedIds).map((id) => this.selectedIds[id]);
 }
 
 module.exports = WarehouseIdSelector;

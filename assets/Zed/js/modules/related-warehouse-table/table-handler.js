@@ -6,6 +6,7 @@
 'use strict';
 
 const WarehouseIdSelector = require('./warehouse-id-selector');
+const tableAccess = require('ZedGuiModules/libs/table/table-access');
 
 const CHECKBOX_CHECKED_STATE_CHECKED = 'checked';
 const CHECKBOX_CHECKED_STATE_UNCHECKED = 'unchecked';
@@ -23,48 +24,56 @@ const CHECKBOX_CHECKED_STATE_UNCHECKED = 'unchecked';
 function TableHandler(options) {
     const _self = this;
     this.warehouseIdSelector = new WarehouseIdSelector();
+    this.destinationHandle = null;
     this.initialCheckboxCheckedState = CHECKBOX_CHECKED_STATE_UNCHECKED;
 
     $.extend(this, options);
+
+    if (this.$destinationTable && this.$destinationTable.length) {
+        this.$destinationTable.on('click', '.remove-item', this.onRemoveCallback);
+
+        tableAccess.requestTable(this.$destinationTable[0], (handle) => {
+            this.destinationHandle = handle;
+
+            handle.created().then(() => this.renderSelection());
+        });
+    }
 
     this.addSelectedWarehouse = (idWarehouse, warehouseUuid, name, status) => {
         if (this.warehouseIdSelector.isIdSelected(warehouseUuid)) {
             return;
         }
 
-        this.warehouseIdSelector.addIdToSelection(warehouseUuid);
-
-        this.$destinationTable
-            .DataTable()
-            .row.add([
-                idWarehouse,
-                decodeURIComponent(String(name).replace(/\+/g, '%20')),
-                decodeURIComponent(String(status).replace(/\+/g, '%20')),
-                `<button data-uuid="${warehouseUuid}" type="button" class="btn btn-xs remove-item">
+        this.warehouseIdSelector.addIdToSelection(warehouseUuid, [
+            idWarehouse,
+            decodeURIComponent(String(name).replace(/\+/g, '%20')),
+            decodeURIComponent(String(status).replace(/\+/g, '%20')),
+            `<button data-uuid="${warehouseUuid}" type="button" class="btn btn-xs remove-item">
                     ${this.$destinationTable.attr('data-remove-button-text')}
                 </button>`,
-            ])
-            .draw();
+        ]);
 
-        $('.remove-item').off('click');
-        $('.remove-item').on('click', this.onRemoveCallback);
-
+        this.renderSelection();
         this.updateSelectedWarehousesLabelCount();
     };
 
-    this.removeSelectedWarehouse = (idWarehouse, warehouseUuid) => {
-        this.$destinationTable
-            .DataTable()
-            .rows()
-            .every(function () {
-                if (!this.data() || idWarehouse !== this.data()[0]) {
-                    return;
-                }
+    /**
+     * The table of the selection is a view over it and is rebuilt from it, so that it can be filled
+     * whenever the plugin gets round to creating it.
+     */
+    this.renderSelection = () => {
+        if (!this.destinationHandle) {
+            return;
+        }
 
-                _self.warehouseIdSelector.removeIdFromSelection(warehouseUuid);
-                this.remove();
-            })
-            .draw();
+        this.destinationHandle.raw().clear().rows.add(this.warehouseIdSelector.getRows()).draw();
+    };
+
+    this.removeSelectedWarehouse = (warehouseUuid) => {
+        if (this.warehouseIdSelector.isIdSelected(warehouseUuid)) {
+            this.warehouseIdSelector.removeIdFromSelection(warehouseUuid);
+            this.renderSelection();
+        }
 
         this.updateSelectedWarehousesLabelCount();
     };

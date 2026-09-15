@@ -6,6 +6,7 @@
 'use strict';
 
 const { TableHandler, CHECKBOX_CHECKED_STATE_CHECKED } = require('./table-handler');
+const tableAccess = require('ZedGuiModules/libs/table/table-access');
 
 /**
  * @param {Object} options
@@ -25,8 +26,6 @@ function RelatedWarehouseTable(options) {
     $.extend(this, options);
 
     this.init = () => {
-        this.$destinationTable.DataTable({ destroy: true });
-
         this.tableHandler = new TableHandler({
             $sourceTable: this.$sourceTable,
             $destinationTable: this.$destinationTable,
@@ -37,23 +36,20 @@ function RelatedWarehouseTable(options) {
             onRemoveCallback: this.onRemoveCallback,
         });
 
-        this.$sourceTable.DataTable().on('draw', (event, settings) => {
-            $(_self.checkboxSelector, $(_self.$sourceTable)).off('change');
+        if (!this.$sourceTable || !this.$sourceTable.length) {
+            return;
+        }
 
-            $(_self.checkboxSelector, $(_self.$sourceTable)).on('change', function () {
-                const info = $.parseJSON($(this).attr('data-info'));
+        this.$sourceTable.on('change', this.checkboxSelector, function () {
+            const info = $.parseJSON($(this).attr('data-info'));
 
-                if (_self.tableHandler.isCheckboxActive($(this))) {
-                    _self.tableHandler.addSelectedWarehouse(
-                        info.idWarehouse,
-                        info.warehouseUuid,
-                        info.name,
-                        info.status,
-                    );
-                } else {
-                    _self.tableHandler.removeSelectedWarehouse(info.idWarehouse, info.warehouseUuid);
-                }
-            });
+            if (_self.tableHandler.isCheckboxActive($(this))) {
+                _self.tableHandler.addSelectedWarehouse(info.idWarehouse, info.warehouseUuid, info.name, info.status);
+
+                return;
+            }
+
+            _self.tableHandler.removeSelectedWarehouse(info.warehouseUuid);
         });
     };
 

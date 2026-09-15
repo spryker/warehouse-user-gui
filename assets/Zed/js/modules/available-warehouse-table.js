@@ -39,9 +39,7 @@ function AvailableWarehouseTable() {
         const uuid = $(this).data('uuid');
         const tableHandler = _self.relatedWarehouseTable.tableHandler;
 
-        $(_self.destinationTableSelector).DataTable().row($(this).parents('tr')).remove().draw();
-        tableHandler.warehouseIdSelector.removeIdFromSelection(uuid);
-        tableHandler.updateSelectedWarehousesLabelCount();
+        tableHandler.removeSelectedWarehouse(uuid);
         $(`input[value="${uuid}"]`, $(_self.sourceTableSelector)).prop('checked', false);
     };
 
