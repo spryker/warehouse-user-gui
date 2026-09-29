@@ -22,7 +22,6 @@ const CHECKBOX_CHECKED_STATE_UNCHECKED = 'unchecked';
  * @param {function} options.onRemoveCallback
  */
 function TableHandler(options) {
-    const _self = this;
     this.warehouseIdSelector = new WarehouseIdSelector();
     this.destinationHandle = null;
     this.initialCheckboxCheckedState = CHECKBOX_CHECKED_STATE_UNCHECKED;

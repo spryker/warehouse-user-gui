@@ -6,7 +6,7 @@
 'use strict';
 
 const { TableHandler, CHECKBOX_CHECKED_STATE_CHECKED } = require('./table-handler');
-const tableAccess = require('ZedGuiModules/libs/table/table-access');
+require('ZedGuiModules/libs/table/table-access');
 
 /**
  * @param {Object} options
